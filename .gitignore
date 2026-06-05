@@ -1,0 +1,10 @@
+*.csv
+*.db
+*.xlsx
+__pycache__/
+.venv/
+.env
+.DS_Store
+VelocityLogs/
+written_sessions.txt
+*.log
