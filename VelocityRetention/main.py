@@ -29,7 +29,7 @@ for filename in sorted(files):
     date = re.search(r"(\d{4}-\d{2}-\d{2})", filename).group(1)
     with gzip.open(filename, "rt") as f:
         for line in f:
-            match = re.search(r"\[(\d{2}:\d{2}:\d{2})\].*\[connected player\] (\w{3,16}).*has (\w{9,12})", line)
+            match = re.search(r"\[(\d{2}:\d{2}:\d{2})\].*\[connected player\] (\w{3,16}).*has (connected|disconnected)", line)
             if match:
                 if "connected" == match.group(3):
                     add_session(match.group(2), match.group(1), date)
@@ -43,7 +43,7 @@ with open("written_sessions.csv", "w", newline="") as written_sessions:
     for session in completed_sessions:
         writer.writerow(session)
 
-
+print(len(active_sessions))
 
 # [20:31:31] [Netty epoll Worker #11/INFO] [com.velocitypowered.proxy.connection.client.AuthSessionHandler]: [connected player] BigKenji81 (/177.115.31.237:51642) has connected
 # [20:34:19] [Netty epoll Worker #11/INFO] [com.velocitypowered.proxy.connection.MinecraftConnection]: [connected player] BigKenji81 (/177.115.31.237:51642) has disconnected
